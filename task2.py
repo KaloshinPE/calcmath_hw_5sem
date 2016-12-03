@@ -10,6 +10,7 @@ A_start = np.array([[1.0, 2.0, 3.0],
 b_start = np.array([10.0, 11.0, 12.0])
 
 
+''' Gauss method (direct)'''
 def add_line(i_target, i_add, k=1):
     # add [i_add] line of system, multiplied by k, to [i_target] line
     A[i_target] += k*A[i_add]
@@ -42,10 +43,6 @@ def solve_triangular_system(A, b):
     solution.reverse()
     return solution
 
-
-
-
-''' Gauss method (direct)'''
 A = np.copy(A_start)
 b = np.copy(b_start)
 
@@ -53,7 +50,33 @@ for i in range(A.shape[0]-1):
     exchange_lines(i, find_nonzero_j(i, i))
     map(lambda j: add_line(j, i, -1*A[j][i]/A[i][i]), range(A.shape[0])[i+1:])
 
-print solve_triangular_system(A, b)
+print "direct method:" + str(solve_triangular_system(A, b))
 
-''' '''
+
+''' method of simple iteration (iterative)'''
+A = np.copy(A_start)
+b = np.copy(b_start)
+
+def matrix_norm(matrix):
+    # calculates ||A||1 norm of matrix
+    max = 0.0
+    for i in range(matrix.shape[0]):
+        new = 0
+        for k in range(matrix.shape[0]):
+            new += np.abs(matrix[i][k])
+        # new = reduce(lambda j1, j2: np.abs(matrix[i][j1]) + np.abs(matrix[i][j2]), range(matrix.shape[0]))
+        if (new > max): max = new
+    return max
+
+# tau = 0.063
+tau = 0
+R = np.identity(A.shape[0]) - tau*A
+print matrix_norm(R)
+F = tau*b
+x = np.zeros(A.shape[0]) # start approximation
+for i in range(1000):
+    x = np.dot(R, x) + F
+print "interative method: " + str(x)
+
+
 
