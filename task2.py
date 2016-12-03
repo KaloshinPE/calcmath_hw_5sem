@@ -36,7 +36,6 @@ def solve_triangular_system(A, b):
     # solve system with top-triangular matrix
     solution = list()
     for i in range(A.shape[0]-1, -1, -1):
-        print b[i]/A[i][i]
         solution.append(b[i]/A[i][i])
         for k in range(i):
             b[k] -= A[k][i]*solution[-1]
@@ -54,7 +53,6 @@ for i in range(A.shape[0]-1):
     exchange_lines(i, find_nonzero_j(i, i))
     map(lambda j: add_line(j, i, -1*A[j][i]/A[i][i]), range(A.shape[0])[i+1:])
 
-print A, b
 print solve_triangular_system(A, b)
 
 ''' '''
