@@ -52,7 +52,7 @@ for i in range(A.shape[0]-1):
     map(lambda j: add_line(j, i, -1*A[j][i]/A[i][i]), range(A.shape[0])[i+1:])
 
 direct_solution = solve_triangular_system(A, b)
-print "direct method:" + str(direct_solution)
+print "direct method (Gauss):" + str(direct_solution)
 
 
 ''' method Jacobi (iterative)'''
@@ -98,9 +98,23 @@ if check_covergence(A) :
     for i in range(number_of_iterations):
         x = np.dot(R, x) + F
 
-    print "iterative method: " + str(x) + ", number of iterations: " + str(number_of_iterations) + ", accuracy = " + str(np.linalg.norm(direct_solution - x))
+    print "iterative method (Jacobi): " + str(x) + ", number of iterations: " + str(number_of_iterations) + ", accuracy = " + str(np.linalg.norm(direct_solution - x))
 
 
+'''method of residual (variation)'''
+A = np.copy(A_start)
+b = np.copy(b_start)
+x = np.zeros(A.shape[0])
+
+for i in range(number_of_iterations):
+    r = b - np.dot(A, x)
+    if (np.linalg.norm(r) == 0):
+        number_of_iterations = i
+        break
+    x = x + np.dot(np.dot(A, r), r)/np.linalg.norm(np.dot(A, r))**2*r
+
+print "variation method (residual): " + str(x) + ", number of iterations: " + str(
+    number_of_iterations) + ", accuracy = " + str(np.linalg.norm(direct_solution - x))
 
 
 
