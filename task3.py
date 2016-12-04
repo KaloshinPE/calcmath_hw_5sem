@@ -43,9 +43,29 @@ def forth_order_scheme(f, x_left, x_right, Yo, grid_size):
         Y.append(Y[-1] + (k1 + 2*k2 + 2*k3 + k4)/6)
     return X, Y
 
+'''
+ret_raw = list()
+    for i in range(11)[1:]:
+        ret_raw.append(Y[grid_size/10*i])
+    return ret_raw'''
+def third_order_scheme(f, x_left, x_right, Yo, grid_size):
+    # Hoit metod, returns raw with 10 values
+    h = (x_right - x_left)/grid_size
+    X = np.linspace(x_left, x_right, grid_size)
+    Y = list()
+    Y.append(Yo)
+    for x in X:
+        k1 = h*f(x, Y[-1])
+        k2 = h*f(x + h/3, Y[-1] + k1/3)
+        k3 = h*f(x + h*2.0/3, Y[-1] + k2*2.0/3)
+        Y.append(Y[-1] + (k1 + 3*k3)/4)
+    return X, Y
+
 
 grid_sizes = [10.0, 20.0, 40.0, 80.0, 160.0]
 for i in range(len(grid_sizes)):
     X, Y = forth_order_scheme(f4, x_left4, x_right4, yo4, grid_sizes[i])
+    plt.plot(X, Y[:-1])
+    X, Y = third_order_scheme(f4, x_left4, x_right4, yo4, grid_sizes[i])
     plt.plot(X, Y[:-1])
 plt.show()
