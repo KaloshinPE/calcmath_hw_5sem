@@ -72,7 +72,7 @@ for i in range(len(grid_sizes)):
     Y2 = third_order_scheme(f1, x_left1, x_right1, yo1, grid_sizes[i])
     print "grid fragmentation: " + str(grid_sizes[i])
     print "third-order scheme: " + str(Y2)
-    print "second-order scheme: " + str(Y1)
+    print "forth-order scheme: " + str(Y1)
 #    print "\n"
 
 print "\nf2:"
@@ -81,7 +81,7 @@ for i in range(len(grid_sizes)):
     Y2 = third_order_scheme(f2, x_left2, x_right2, yo2, grid_sizes[i])
     print "grid fragmentation: " + str(grid_sizes[i])
     print "third-order scheme: " + str(Y2)
-    print "second-order scheme: " + str(Y1)
+    print "forth-order scheme: " + str(Y1)
  #   print "\n"
 
 print "\nf3:"
@@ -90,7 +90,7 @@ for i in range(len(grid_sizes)):
     Y2 = third_order_scheme(f3, x_left3, x_right3, yo3, grid_sizes[i])
     print "grid fragmentation: " + str(grid_sizes[i])
     print "third-order scheme: " + str(Y2)
-    print "second-order scheme: " + str(Y1)
+    print "forth-order scheme: " + str(Y1)
  #   print "\n"
 
 print "\nf4:"
@@ -99,5 +99,5 @@ for i in range(len(grid_sizes)):
     Y2 = third_order_scheme(f4, x_left4, x_right4, yo4, grid_sizes[i])
     print "grid fragmentation: " + str(grid_sizes[i])
     print "third-order scheme: " + str(Y2)
-    print "second-order scheme: " + str(Y1)
+    print "forth-order scheme: " + str(Y1)
  #   print "\n"
